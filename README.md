@@ -11,8 +11,10 @@
 
 ***
 ###  Libraries and Tools used in this project
-1. **Frontend** : HTML, CSS, JavaScript
-2. **Framework/Libraries** : React (optional), MUI etc.
+1. **React.js**
+2. **Material-UI**
+3. **AXIOS**
+4. **Google Translate API**
 
  ___
 ## Usage
