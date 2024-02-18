@@ -262,7 +262,7 @@ function App() {
             value={secondlangtext}
 
           />
-          <Stack direction="row" justifyContent="start" alignItems="center" spacing={0.2} onClick={() => text_to_speech(secondlangtext)}>
+          <Stack direction="row" justifyContent="start" alignItems="center" spacing={0.2}>
             <Tooltip title="text copied" arrow placement="top-end" open={showsecondtooltip} onClose={() => setShowsecondtooltip(false)}>
               <IconButton size="small" disabled={firstlangtext.length > 0 ? false : true} onClick={() => {
                 text_to_copy(secondlangtext)
