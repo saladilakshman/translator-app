@@ -253,7 +253,7 @@ const mobilestyle=Mobile?{
             </Tooltip>
           </Stack>
         </div>
-        <div style={{ position: 'relative',marginBlockEnd:Mobile?12:'' }}>
+        <div style={{ position: 'relative' }}>
           <Box component="textarea" sx={{ ...styles.textarea, backgroundColor: '#f8f9fa' }}
             placeholder="Translation"
             disabled
@@ -265,7 +265,11 @@ const mobilestyle=Mobile?{
               <IconButton size="small" disabled={firstlangtext.length > 0 ? false : true} onClick={() => {
                 text_to_copy(secondlangtext)
                 setShowsecondtooltip(true)
-              }}>
+              }}
+              sx={{
+                paddingBlockEnd:Mobile?5:''
+              }}
+              >
                 <ContentCopyIcon />
               </IconButton>
             </Tooltip>
