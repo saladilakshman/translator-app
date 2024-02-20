@@ -3,7 +3,7 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import { Box, Container, IconButton, Stack, Button, TextField, MenuItem, Tooltip, Typography, Link } from "@mui/material";
+import { Box, Container, IconButton, Stack, Button, TextField, MenuItem, Tooltip,useTheme,useMediaQuery } from "@mui/material";
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 import KeyboardVoiceIcon from '@mui/icons-material/KeyboardVoice';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
@@ -12,7 +12,8 @@ import { Languages } from './languages';
 import axios from "axios";
 import { API_KEY } from './key';
 function App() {
-
+  const theme=useTheme();
+  const Mobile=useMediaQuery(theme.breakpoints.only("xs"));
   const [firstlang, setFirstlang] = useState("en");
   const [secondlang, setSecondlang] = useState("te");
   const [firstlangtext, setFirstlangtext] = useState("");
@@ -110,8 +111,13 @@ function App() {
     }
   };
 
-
-
+const mobilestyle=Mobile?{
+  position:'fixed',
+  bottom:0,
+  left:0,
+  right:0,
+  zIndex:100
+}:null
 
   return (
     <Container sx={{
@@ -187,7 +193,7 @@ function App() {
           })}
         </TextField>
       </Stack>
-      <Stack direction={{ xs: 'column', sm: 'column', lg: 'row' }} justifyContent="center" alignItems="center"
+      <Stack direction={{ xs: 'column', sm: 'row', lg: 'row' }} justifyContent="center" alignItems="center"
         spacing={{
           sm: 1,
           xs: 1,
@@ -268,9 +274,10 @@ function App() {
       </Stack>
       <Button size="small" variant="contained" sx={{
         width: { xs: '100%', sm: '100%', lg: 590 },
-        display: 'block',
+        display:'block',
         margin: 'auto',
-        marginBlockStart: 5
+        marginBlockStart: 5,
+        ...mobilestyle
       }}
         disabled={disablebuttons.translate_button}
         onClick={translate_text}
