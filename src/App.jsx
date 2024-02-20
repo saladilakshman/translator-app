@@ -3,7 +3,7 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import { Box, Container, IconButton, Stack, Button, MenuItem, TextField, Tooltip, Typography, Link } from "@mui/material";
+import { Box, Container, IconButton, Stack, Button, TextField, MenuItem, Tooltip, Typography, Link } from "@mui/material";
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 import KeyboardVoiceIcon from '@mui/icons-material/KeyboardVoice';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
@@ -24,33 +24,7 @@ function App() {
   const [isfetching, setIsfetching] = useState(false);
   const [showfirsttooltip, setShowfirsttooltip] = useState(false);
   const [showsecondtooltip, setShowsecondtooltip] = useState(false);
-  async function openFile() {
-    const options = {
-      multiple: false,
-      types: [
-        {
-          description: 'text files',
-          accept: {
-            'text/plain': ['.txt']
-          }
-        }
-      ]
-    }
-    try {
-      const filespile = await window.showOpenFilePicker(options);
-      //const file = await fileHandle.getFile();
-      // Do something with the selected file
-      console.log(filespile[0].getFile())
-      const fileReader = new FileReader();
-      fileReader.onloadend = (e) => {
-        console.log(e.target.result)
-      }
-      //fileReader.readAsText(file)
-    } catch (err) {
-      console.error('Error accessing file:', err);
-    }
-  }
-
+  
   /**function to convert text to speech mode */
   const text_to_speech = (txt) => {
     const speak = window.speechSynthesis;
@@ -242,9 +216,27 @@ function App() {
             <IconButton size="small" disabled={firstlangtext.length > 0 ? false : true} onClick={() => text_to_speech(firstlangtext)}>
               <KeyboardVoiceIcon />
             </IconButton>
-            <IconButton size="small" disabled={disablebuttons.file} onClick={openFile}>
-              <FilePresentIcon />
-            </IconButton>
+            <label htmlFor="upload-textfile">
+              <input
+                style={{ display: 'none' }}
+                id="upload-textfile"
+                name="upload-textfile"
+                type="file"
+                accept=".txt,.csv"
+                onChange={()=>{
+                  const fileSelect=document.getElementById("upload-textfile");
+                  const fileReader=new FileReader();
+                  fileReader.onloadend=(e)=>{
+                    setFirstlangtext(e.target.result)
+                  }
+                  fileReader.readAsText(fileSelect.files[0])
+                }}
+              />
+
+              <IconButton  variant="contained" component="span"size="small">
+                <FilePresentIcon/>
+              </IconButton>
+            </label>
             <Tooltip title="text copied" arrow placement="top-end" open={showfirsttooltip} onClose={() => setShowfirsttooltip(false)}>
               <IconButton size="small" disabled={firstlangtext.length > 0 ? false : true} onClick={() => {
                 text_to_copy(firstlangtext);
