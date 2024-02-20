@@ -253,7 +253,7 @@ const mobilestyle=Mobile?{
             </Tooltip>
           </Stack>
         </div>
-        <div style={{ position: 'relative',marginBlockEnd:5 }}>
+        <div style={{ position: 'relative',marginBlockEnd:Mobile?12:'' }}>
           <Box component="textarea" sx={{ ...styles.textarea, backgroundColor: '#f8f9fa' }}
             placeholder="Translation"
             disabled
